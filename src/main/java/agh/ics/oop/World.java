@@ -1,11 +1,9 @@
 package agh.ics.oop;
 
-
 public class World {
     public static void main(String[] args) {
         System.out.println("system wystartowal");
 
-//        run(new String[] {"a", "b"});
         Direction[] directions = convert_to_enum_tab(args);
 
         run(directions);
@@ -22,10 +20,6 @@ public class World {
             };
             System.out.println(message);
         }
-//        for (int i = 1; i < tab.length; ++i){
-//            System.out.print(", ");
-//            System.out.print(tab[i]);
-//        }
     }
     public static Direction[] convert_to_enum_tab(String[] tab){
         Direction [] directions = new Direction[tab.length];
