@@ -8,3 +8,6 @@
 /dataSources.local.xml
 # Rars for labs
 /rars_for_labs/
+# Build
+/build/
+/.gradle/
