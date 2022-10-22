@@ -1,10 +1,19 @@
 package agh.ics.oop;
 
+import java.util.Arrays;
+
 public class World {
     public static void main(String[] args) {
         System.out.println("system wystartowal");
+        System.out.println(Arrays.toString(args));
+
+        MoveDirection[] moves = OptionsParser.parse(args);
+        System.out.println(Arrays.toString(moves));
         Animal bobr = new Animal();
-        System.out.println(bobr);
+        for(MoveDirection move: moves){
+            System.out.println(bobr);
+            bobr.move(move);
+        }
 
 
 //        Direction[] directions = convert_to_enum_tab(args);

@@ -12,7 +12,7 @@ public class Animal {
     }
     public String toString(){
         String str = "";
-        str += "position: " + String.valueOf(this.position) + "\nfacing " + String.valueOf(this.direction);
+        str += "position: " + this.position + " facing: " + this.direction;
         return str;
     }
 
@@ -24,7 +24,20 @@ public class Animal {
         switch (direction){
             case LEFT -> this.direction = this.direction.previous();
             case RIGHT -> this.direction = this.direction.next();
-            // komentarz z odpowiedzia do chyba 10 pkt na upel w komentarzu pod rar zip czy co tam masz
+            case FORWARD -> {
+                Vector2d new_position = this.position.add(this.direction.toUnitVector());
+                if(new_position.precedes(new Vector2d(4, 4)) && new_position.follows(new Vector2d(0, 0))){
+                    this.position = new_position;
+                }
+            }
+            case BACKWARD -> {
+                Vector2d new_position = this.position.add(this.direction.toUnitVector().opposite());
+                if(new_position.precedes(new Vector2d(4, 4)) && new_position.follows(new Vector2d(0, 0))){
+                    this.position = new_position;
+                }
+            }
         }
+            // komentarz z odpowiedzia do chyba 10 pkt na upel w komentarzu pod rar zip czy co tam masz
     }
 }
+
