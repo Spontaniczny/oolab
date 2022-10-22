@@ -3,10 +3,12 @@ package agh.ics.oop;
 public class World {
     public static void main(String[] args) {
         System.out.println("system wystartowal");
+        Animal bobr = new Animal();
+        System.out.println(bobr);
 
-        Direction[] directions = convert_to_enum_tab(args);
 
-        run(directions);
+//        Direction[] directions = convert_to_enum_tab(args);
+//        run(directions);
         System.out.println("system zakonczyl dzialanie");
     }
 
