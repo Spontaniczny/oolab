@@ -1,12 +1,23 @@
 package agh.ics.oop;
 
+import java.util.Arrays;
+
 public class World {
     public static void main(String[] args) {
         System.out.println("system wystartowal");
+        System.out.println(Arrays.toString(args));
 
-        Direction[] directions = convert_to_enum_tab(args);
+        MoveDirection[] moves = OptionsParser.parse(args);
+        System.out.println(Arrays.toString(moves));
+        Animal bobr = new Animal();
+        for(MoveDirection move: moves){
+            System.out.println(bobr);
+            bobr.move(move);
+        }
 
-        run(directions);
+
+//        Direction[] directions = convert_to_enum_tab(args);
+//        run(directions);
         System.out.println("system zakonczyl dzialanie");
     }
 
