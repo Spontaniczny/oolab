@@ -1,19 +1,36 @@
 package agh.ics.oop;
 
-public class Animal {
+public class Animal{
     private MapDirection direction;
     private Vector2d position;
+    IWorldMap map;
 
 
     public Animal(){
         this.direction = MapDirection.NORTH;
         this.position = new Vector2d(2, 2);
-
+    }
+    public Animal(IWorldMap map){
+        this.map = map;
+        this.direction = MapDirection.NORTH;
+        this.position = new Vector2d(2, 2);
+    }
+    public Animal(IWorldMap map, Vector2d initialPosition){
+        this.map = map;
+        this.direction = MapDirection.NORTH;
+        this.position = initialPosition;
     }
     public String toString(){
-        String str = "";
-        str += "position: " + this.position + " facing: " + this.direction;
-        return str;
+        return switch (this.direction){
+            case NORTH ->  "N";
+            case EAST -> "E";
+            case SOUTH -> "S";
+            case WEST -> "W";
+        };
+    }
+
+    public Vector2d getPosition() {
+        return this.position;
     }
 
     public boolean isAt(Vector2d position){
@@ -26,18 +43,17 @@ public class Animal {
             case RIGHT -> this.direction = this.direction.next();
             case FORWARD -> {
                 Vector2d new_position = this.position.add(this.direction.toUnitVector());
-                if(new_position.precedes(new Vector2d(4, 4)) && new_position.follows(new Vector2d(0, 0))){
+                if(this.map.canMoveTo(new_position)){
                     this.position = new_position;
                 }
             }
             case BACKWARD -> {
                 Vector2d new_position = this.position.add(this.direction.toUnitVector().opposite());
-                if(new_position.precedes(new Vector2d(4, 4)) && new_position.follows(new Vector2d(0, 0))){
+                if(this.map.canMoveTo(new_position)){
                     this.position = new_position;
                 }
             }
         }
-            // komentarz z odpowiedzia do chyba 10 pkt na upel w komentarzu pod rar zip czy co tam masz
     }
 }
 
