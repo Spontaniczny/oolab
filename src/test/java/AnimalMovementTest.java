@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class AnimalMovementTest {
 
     @Test
-    public void Animals_movement_test_with_no_moves(){
+    public void Animal_movement_test_with_no_moves(){
         String[] args1 = {};
         MoveDirection[] directions = new OptionsParser().parse(args1);
         IWorldMap map = new RectangularMap(10, 5);
