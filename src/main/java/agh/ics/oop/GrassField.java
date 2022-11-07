@@ -41,7 +41,7 @@ public class GrassField extends AbstractWorldMap{
         int min_y = Integer.MAX_VALUE;
         int max_y = 0;
         Vector2d pos;
-        for(Animal animal: this.animals){
+        for(Animal animal: this.animals.values()){
             pos = animal.getPosition();
             min_x = min(min_x, pos.x);
             min_y = min(min_y, pos.y);

@@ -1,12 +1,15 @@
 package agh.ics.oop;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-abstract public class AbstractWorldMap implements IWorldMap{
+abstract public class AbstractWorldMap implements IWorldMap, IPositionChangeObserver{
     protected int height;
     protected int width;
-    protected List<Animal> animals = new ArrayList<>();
+//    protected List<Animal> animals = new ArrayList<>();
+    Map<Vector2d, Animal> animals = new HashMap<>();
     protected List<Grass> grass_fields = new ArrayList<>();
 
     protected MapVisualizer obj;
@@ -34,7 +37,7 @@ abstract public class AbstractWorldMap implements IWorldMap{
                 return false;
             }
         }
-        this.animals.add(animal);
+        this.animals.put(position, animal);
         return true;
     }
 
@@ -45,20 +48,15 @@ abstract public class AbstractWorldMap implements IWorldMap{
                 return true;
             }
         }
-        for(Animal animal: animals){
-            if(animal.isAt(position)){
-                return true;
-            }
-        }
-        return false;
+        return this.animals.get(position) != null;
     }
 
     @Override
     public Object objectAt(Vector2d position) {
-        for(Animal animal: animals){
-            if(animal.isAt(position)){
-                return animal;
-            }
+        var obj = this.animals.get(position);
+
+        if(this.animals.get(position) != null){
+            return this.animals.get(position);
         }
         for(Grass grass: grass_fields){
             if(grass.getPosition().equals(position)){
@@ -66,5 +64,10 @@ abstract public class AbstractWorldMap implements IWorldMap{
             }
         }
         return null;
+    }
+
+    @Override
+    public void positionChanged(Vector2d oldPosition, Vector2d newPosition){
+        this.animals.put(newPosition, this.animals.remove(oldPosition));
     }
 }

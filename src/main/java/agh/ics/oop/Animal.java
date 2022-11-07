@@ -1,8 +1,12 @@
 package agh.ics.oop;
 
+import java.util.LinkedList;
+
 public class Animal{
     private MapDirection direction;
     private Vector2d position;
+
+    private LinkedList<IPositionChangeObserver> observers = new LinkedList<>();
     IWorldMap map;
 
 
@@ -54,6 +58,16 @@ public class Animal{
                 }
             }
         }
+    }
+    void positionChanged(){
+
+    }
+    void addObserver(IPositionChangeObserver observer){
+        this.observers.add(observer);
+    }
+
+    void removeObserver(IPositionChangeObserver observer){
+        this.observers.remove(observer);
     }
 }
 
