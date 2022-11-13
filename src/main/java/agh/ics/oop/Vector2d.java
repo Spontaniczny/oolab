@@ -50,20 +50,18 @@ public class Vector2d {
         return new Vector2d(-this.x, -this.y);
     }
 
-    public boolean equals(Vector2d other){
+    public boolean equals(Object other){
         if (this == other)
             return true;
-        if (other == null)
-            return false;
-        if (getClass() != other.getClass()){
+        if(!(other instanceof Vector2d that)){
             return false;
         }
-        return Objects.equals(this.x, ((Vector2d) other).x) && Objects.equals(this.y, ((Vector2d) other).y);
+        return this.x == that.x && this.y == that.y;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(x, y);
+        return Objects.hash(this.x, this.y);
     }
 
 }

@@ -1,7 +1,5 @@
 package agh.ics.oop;
 
-import java.util.Arrays;
-
 public class World {
     public static void main(String[] args) {
         System.out.println("system wystartowal");
@@ -24,6 +22,7 @@ public class World {
 
 //        Direction[] directions = convert_to_enum_tab(args);
 //        run(directions);
+//        System.out.println((GrassField) (map.animals.get));
         System.out.println("system zakonczyl dzialanie");
     }
 
