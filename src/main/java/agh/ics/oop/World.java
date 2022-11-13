@@ -22,6 +22,7 @@ public class World {
 
 //        Direction[] directions = convert_to_enum_tab(args);
 //        run(directions);
+//        System.out.println((GrassField) (map.animals.get));
         System.out.println("system zakonczyl dzialanie");
     }
 

@@ -1,12 +1,13 @@
 package agh.ics.oop;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Animal{
     private MapDirection direction;
     private Vector2d position;
 
-    private LinkedList<IPositionChangeObserver> observers = new LinkedList<>();
+    private List<IPositionChangeObserver> observers = new ArrayList<>();
     IWorldMap map;
 
 
@@ -18,11 +19,13 @@ public class Animal{
         this.map = map;
         this.direction = MapDirection.NORTH;
         this.position = new Vector2d(2, 2);
+        addObserver((IPositionChangeObserver) map);
     }
     public Animal(IWorldMap map, Vector2d initialPosition){
         this.map = map;
         this.direction = MapDirection.NORTH;
         this.position = initialPosition;
+        addObserver((IPositionChangeObserver) map);
     }
     public String toString(){
         return switch (this.direction){
@@ -48,19 +51,23 @@ public class Animal{
             case FORWARD -> {
                 Vector2d new_position = this.position.add(this.direction.toUnitVector());
                 if(this.map.canMoveTo(new_position)){
+                    positionChanged(this.position, new_position);
                     this.position = new_position;
                 }
             }
             case BACKWARD -> {
                 Vector2d new_position = this.position.add(this.direction.toUnitVector().opposite());
                 if(this.map.canMoveTo(new_position)){
+                    positionChanged(this.position, new_position);
                     this.position = new_position;
                 }
             }
         }
     }
-    void positionChanged(){
-
+    void positionChanged(Vector2d old_pos, Vector2d new_pos){
+        for(IPositionChangeObserver observer: this.observers){
+            observer.positionChanged(old_pos, new_pos);
+        }
     }
     void addObserver(IPositionChangeObserver observer){
         this.observers.add(observer);

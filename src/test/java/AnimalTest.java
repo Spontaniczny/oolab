@@ -1,6 +1,4 @@
-import agh.ics.oop.Animal;
-import agh.ics.oop.MoveDirection;
-import agh.ics.oop.OptionsParser;
+import agh.ics.oop.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -9,7 +7,9 @@ public class AnimalTest {
 
     @Test
     public void Animal_whole_class_test(){
-        Animal animal1 = new Animal();   // (2, 2), Północ
+        AbstractWorldMap map = new RectangularMap(10 , 5);
+        Animal animal1 = new Animal(map, new Vector2d(2, 2));   // (2, 2), Północ
+        map.place(animal1);
         assertEquals(animal1.toString() + animal1.getPosition(),"N(2,2)");
         String[] tab = {"f", "forward", "b", "backward", "XD", "XDD", "l", "left", "r", "right", "XDDD"};
         MoveDirection[] moves = OptionsParser.parse(tab);
@@ -21,30 +21,30 @@ public class AnimalTest {
         animal1.move(MoveDirection.FORWARD);
         assertEquals(animal1.toString() + animal1.getPosition(), "N(2,4)");
         animal1.move(MoveDirection.FORWARD);
-        assertEquals(animal1.toString() + animal1.getPosition(), "N(2,4)");
+        assertEquals(animal1.toString() + animal1.getPosition(), "N(2,5)");
         animal1.move(MoveDirection.RIGHT);
         animal1.move(MoveDirection.RIGHT);
-        assertEquals(animal1.toString() + animal1.getPosition(), "S(2,4)");
+        assertEquals(animal1.toString() + animal1.getPosition(), "S(2,5)");
         animal1.move(MoveDirection.LEFT);
         animal1.move(MoveDirection.FORWARD);
         animal1.move(MoveDirection.FORWARD);
-        assertEquals(animal1.toString() + animal1.getPosition(), "E(4,4)");
+        assertEquals(animal1.toString() + animal1.getPosition(), "E(4,5)");
         animal1.move(MoveDirection.FORWARD);
-        assertEquals(animal1.toString() + animal1.getPosition(), "E(4,4)");
+        assertEquals(animal1.toString() + animal1.getPosition(), "E(5,5)");
         animal1.move(MoveDirection.LEFT);
         animal1.move(MoveDirection.BACKWARD);
         animal1.move(MoveDirection.BACKWARD);
         animal1.move(MoveDirection.BACKWARD);
         animal1.move(MoveDirection.BACKWARD);
-        assertEquals(animal1.toString() + animal1.getPosition(), "N(4,0)");
+        assertEquals(animal1.toString() + animal1.getPosition(), "N(5,1)");
         animal1.move(MoveDirection.BACKWARD);
-        assertEquals(animal1.toString() + animal1.getPosition(), "N(4,0)");
+        assertEquals(animal1.toString() + animal1.getPosition(), "N(5,0)");
         animal1.move(MoveDirection.RIGHT);
         animal1.move(MoveDirection.BACKWARD);
         animal1.move(MoveDirection.BACKWARD);
         animal1.move(MoveDirection.BACKWARD);
         animal1.move(MoveDirection.BACKWARD);
-        assertEquals(animal1.toString() + animal1.getPosition(), "E(0,0)");
+        assertEquals(animal1.toString() + animal1.getPosition(), "E(1,0)");
         animal1.move(MoveDirection.BACKWARD);
         assertEquals(animal1.toString() + animal1.getPosition(), "E(0,0)");
         animal1.move(MoveDirection.LEFT);
