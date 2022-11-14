@@ -2,29 +2,35 @@ package agh.ics.oop;
 
 public class World {
     public static void main(String[] args) {
-        System.out.println("system wystartowal");
+        try {
+            System.out.println("system wystartowal");
 
-        MoveDirection[] directions = new OptionsParser().parse(args);
-//        IWorldMap map = new RectangularMap(10, 5);
-        IWorldMap map = new GrassField(10);
-        Vector2d[] positions = { new Vector2d(2,2), new Vector2d(3,4) };
-        IEngine engine = new SimulationEngine(directions, map, positions);
-        engine.run();
+            MoveDirection[] directions = new OptionsParser().parse(args);
+            //        IWorldMap map = new RectangularMap(10, 5);
+            IWorldMap map = new GrassField(10);
+            Vector2d[] positions = {new Vector2d(2, 2), new Vector2d(3, 4)};
+            IEngine engine = new SimulationEngine(directions, map, positions);
+            engine.run();
 
-//        MoveDirection[] moves = OptionsParser.parse(args);
-//        System.out.println(Arrays.toString(moves));
-//        Animal bobr = new Animal();
-//        for(MoveDirection move: moves){
-//            System.out.println(bobr);
-//            bobr.move(move);
-//        }
+            //        MoveDirection[] moves = OptionsParser.parse(args);
+            //        System.out.println(Arrays.toString(moves));
+            //        Animal bobr = new Animal();
+            //        for(MoveDirection move: moves){
+            //            System.out.println(bobr);
+            //            bobr.move(move);
+            //        }
 
 
-//        Direction[] directions = convert_to_enum_tab(args);
-//        run(directions);
-//        System.out.println((GrassField) (map.animals.get));
-        System.out.println("system zakonczyl dzialanie");
+            //        Direction[] directions = convert_to_enum_tab(args);
+            //        run(directions);
+            //        System.out.println((GrassField) (map.animals.get));
+            System.out.println("system zakonczyl dzialanie");
+        }
+        catch (IllegalArgumentException exception){
+            throw exception;
+        }
     }
+
 
     public static Direction[] convert_to_enum_tab(String[] tab){
         Direction [] directions = new Direction[tab.length];
@@ -34,7 +40,7 @@ public class World {
                 case "b" -> directions[i] = Direction.BACKWARD;
                 case "l" -> directions[i] = Direction.LEFT;
                 case "r" -> directions[i] = Direction.RIGHT;
-                default -> directions[i] = null;
+                default -> throw new IllegalArgumentException(tab[i] + " is not legal move specification");
             }
         }
         return directions;

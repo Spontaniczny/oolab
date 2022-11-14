@@ -17,11 +17,14 @@ public class OptionsParser {
                 case "l", "left" -> tab[i] = MoveDirection.LEFT;
                 case "r", "right" -> tab[i] = MoveDirection.RIGHT;
             }
-            if(tab[i] != null){
+            if(tab[i] != null) {
                 i += 1;
-                if(i == correct_values){
+                if (i == correct_values) {
                     break;
                 }
+            }
+            else{
+                throw new IllegalArgumentException(arg + " is not legal move specification");
             }
         }
         return tab;

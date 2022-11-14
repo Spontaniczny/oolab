@@ -11,10 +11,16 @@ public class AnimalTest {
         Animal animal1 = new Animal(map, new Vector2d(2, 2));   // (2, 2), Północ
         map.place(animal1);
         assertEquals(animal1.toString() + animal1.getPosition(),"N(2,2)");
-        String[] tab = {"f", "forward", "b", "backward", "XD", "XDD", "l", "left", "r", "right", "XDDD"};
-        MoveDirection[] moves = OptionsParser.parse(tab);
-        for(MoveDirection move: moves){
-            animal1.move(move);
+        String[] tab = {"f", "forward", "b", "backward", "XD", "l", "left", "r", "right", "XDDD"};
+        MoveDirection[] moves;
+        try{
+            moves = OptionsParser.parse(tab);
+            for(MoveDirection move: moves){
+                animal1.move(move);
+            }
+        }
+        catch (IllegalArgumentException exception){
+            assertEquals(exception.toString(), "java.lang.IllegalArgumentException: XD is not legal move specification");
         }
         assertEquals(animal1.toString() + animal1.getPosition(), "N(2,2)");
         animal1.move(MoveDirection.FORWARD);
