@@ -10,6 +10,7 @@ abstract public class AbstractWorldMap implements IWorldMap, IPositionChangeObse
     protected Vector2d lower_left;
     protected Vector2d upper_right;
     protected MapVisualizer obj;
+    public MapBoundary mapBoundary = new MapBoundary();
 
     public String toString(){
         Vector2d[] bounds = getMapBounds();
@@ -35,6 +36,7 @@ abstract public class AbstractWorldMap implements IWorldMap, IPositionChangeObse
             }
         }
         this.animals.put(position, animal);
+        this.mapBoundary.AddAnimal(animal);
         return true;
     }
 
