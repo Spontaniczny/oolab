@@ -31,7 +31,7 @@ abstract public class AbstractWorldMap implements IWorldMap, IPositionChangeObse
         Vector2d position = animal.getPosition();
         if(isOccupied(position)){
             if(objectAt(position) instanceof Animal){
-                return false;
+                throw new IllegalArgumentException("Position: " + position + " is already occupied by another animal.");
             }
         }
         this.animals.put(position, animal);
