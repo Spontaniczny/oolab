@@ -20,7 +20,8 @@ public class App extends Application {
 
     @Override
     public void init() throws Exception {
-        String[] args = {"l", "l", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f"};
+//        String[] args = {"l", "l", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f", "f"};
+        String[] args = getParameters().getRaw().toArray(new String[0]);
 //        System.out.println("system wystartowal");
         MoveDirection[] directions = OptionsParser.parse(args);
         //        IWorldMap map = new RectangularMap(10, 5);
