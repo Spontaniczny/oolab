@@ -3,7 +3,7 @@ package agh.ics.oop;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SimulationEngine implements IEngine{
+public class SimulationEngine implements IEngine, Runnable{
     private IWorldMap map;
     private MoveDirection[] moves;
     private List<Animal> animals;
@@ -20,6 +20,7 @@ public class SimulationEngine implements IEngine{
     }
     @Override
     public void run(){
+        System.out.println("Thread started.");
         System.out.println(this.map);
         int n = animals.size();
         for(int i = 0; i < this.moves.length; i++){
